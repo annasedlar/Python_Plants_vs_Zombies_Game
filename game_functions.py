@@ -6,5 +6,11 @@ def check_events(screen, game_settings):
 		if event.type == pygame.QUIT: 
 			sys.exit()
 
-def update_screen(screen, game_settings):
-	print 'test';
+def update_screen(screen, game_settings, background, zombies):
+	# print 'test';
+	screen.blit(background.image, background.rect); 
+
+	# draw zombies
+	for zombie in zombies.sprites():
+		zombie.update_me();
+		zombie.draw_me();
