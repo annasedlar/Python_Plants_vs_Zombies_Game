@@ -19,6 +19,14 @@ def check_events(screen, game_settings, squares, plants, bullets):
 					print "square: ", square.square_number; 
 					plants.add(Peashooter(screen, square));
 
+		elif event.type == pygame.KEYDOWN:
+			print event.key
+			if event.key == pygame.K_SPACE:
+				print "pressed space"
+				for plant in plants:
+					plant.draw_me();
+					bullets.add(Bullet(screen, plant));
+
 def update_screen(screen, game_settings, background, zombies, squares, plants, bullets, tick):
 	# print 'test';
 	screen.blit(background.image, background.rect); 
