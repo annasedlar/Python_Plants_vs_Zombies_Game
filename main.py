@@ -37,6 +37,16 @@ def run_game():
 
 		pygame.display.flip();
 
+		plants_died = groupcollide(plants, zombies, True, True);
+		zombies_died = groupcollide(zombies, bullets, True, True);
+
+	if plants_died: 
+		print "*************************************"
+		print "*************************************"
+		print "************YOU LOST!****************"
+		print "*************************************"
+		print "*************************************"
+
 
 
 run_game(); 
