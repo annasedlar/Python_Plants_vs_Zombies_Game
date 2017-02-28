@@ -1,7 +1,7 @@
 import sys; 
 import pygame; 
 
-def check_events(screen, game_settings): 
+def check_events(screen, game_settings, squares): 
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT: 
 			sys.exit()
@@ -10,7 +10,11 @@ def check_events(screen, game_settings):
 			print mouse_x;
 			print mouse_y;
 
-def update_screen(screen, game_settings, background, zombies):
+			for square in squares: 
+				if square.rect.collidepoint(mouse_x, mouse_y):
+					print "square: ", square.square_number; 
+
+def update_screen(screen, game_settings, background, zombies, squares):
 	# print 'test';
 	screen.blit(background.image, background.rect); 
 

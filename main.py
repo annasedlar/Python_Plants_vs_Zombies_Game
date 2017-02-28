@@ -28,8 +28,8 @@ for i in range(0,5):
 def run_game():
 	tick = 0; 
 	while 1: 
-		gf.check_events(screen, game_settings); 
-		gf.update_screen(screen, game_settings, background, zombies);
+		gf.check_events(screen, game_settings, squares); 
+		gf.update_screen(screen, game_settings, background, zombies, squares);
 		# screen.fill(game_settings.bg_color); 
 		tick += 1; 
 		if tick % 30 == 0:
