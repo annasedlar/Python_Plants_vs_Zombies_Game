@@ -42,12 +42,16 @@ def run_game():
 		# zombies_died = groupcollide(zombies, bullets, True, True);
 
 		for zombie in zombies_hit:
-			print zombie; 
-			# the zombie took 1 unit damage
-			zombie.hit(1);
-			if zombie.health <= 0:
-				zombies.remove(zombie); 
-				game_settings.zombie_in_row[zombie.yard_row] -= 1; 
+			# print zombie; 
+			# print zombies_hit[zombie];
+			if zombie.yard_row == zombies_hit[zombie][0].yard_row:
+				bullets.remove(zombies_hit[zombie][0]);
+				print "same row!"
+				# the zombie took 1 unit damage
+				zombie.hit(1);
+				if zombie.health <= 0:
+					zombies.remove(zombie); 
+					game_settings.zombie_in_row[zombie.yard_row] -= 1; 
 
 		pygame.display.flip();
 

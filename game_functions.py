@@ -51,7 +51,7 @@ def update_screen(screen, game_settings, background, zombies, squares, plants, b
 		plant.draw_me();
 		print plant.yard_row; 
 		# every 1 second = 30 frames
-		if tick % 30 == 0:
+		if tick % 15 == 0:
 			if game_settings.zombie_in_row[plant.yard_row] >0: 
 				bullets.add(Bullet(screen, plant));
 			
