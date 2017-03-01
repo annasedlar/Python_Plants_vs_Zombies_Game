@@ -6,10 +6,12 @@ from bullet import Bullet;
 
 
 def check_events(screen, game_settings, squares, plants, bullets): 
+	# print 'test'
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT: 
 			sys.exit()
 		elif event.type == pygame.MOUSEBUTTONDOWN:
+			print event.type
 			mouse_x, mouse_y = pygame.mouse.get_pos(); 
 			print mouse_x;
 			print mouse_y;
@@ -41,18 +43,22 @@ def update_screen(screen, game_settings, background, zombies, squares, plants, b
 	if game_settings.highlighted_square != 0:
 		# params for draw: 1. WHERE (screen) 2. COLOR (RGB tuple) 3. coordinates (left, top, width, height (tuple)) 4. radius in px
 		pygame.draw.rect(screen, (255, 215, 0), (game_settings.highlighted_square.rect.left, game_settings.highlighted_square.rect.top, game_settings.squares['square_width'], game_settings.squares['square_height']), 5)
+	
 
 	# draw zombies
 	for zombie in zombies.sprites():
-		zombie.update_me();
+		if game_settings.game_active == True:
+			zombie.update_me();
 		zombie.draw_me();
+		if zombie.rect.left <= zombie.screen_rect.left:
+			game_settings.game_active = False;
 
 	for plant in plants:
 		plant.draw_me();
 		print plant.yard_row; 
 		# every 1 second = 30 frames
-		if tick % 15 == 0:
-			if game_settings.zombie_in_row[plant.yard_row] >0: 
+		if tick % 10 == 0:
+			if game_settings.zombie_in_row[plant.yard_row] > 0: 
 				bullets.add(Bullet(screen, plant));
 			
 

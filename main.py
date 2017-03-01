@@ -28,31 +28,31 @@ for i in range(0,5):
 def run_game():
 	tick = 0; 
 	while 1: 
+		# print game_settings.game_active;
 		gf.check_events(screen, game_settings, squares, plants, bullets); 
+		if game_settings.game_active == True:
+			# screen.fill(game_settings.bg_color); 
+			tick += 1; 
+			if tick % 30 == 0:
+				zombies.add(Zombie(screen, game_settings));
+
+			plants_died = groupcollide(plants, zombies, True, True);
+			zombies_hit = groupcollide(zombies, bullets, False, True);
+			# zombies_died = groupcollide(zombies, bullets, True, True);
+
+			for zombie in zombies_hit:
+				# print zombie; 
+				# print zombies_hit[zombie];
+				if zombie.yard_row == zombies_hit[zombie][0].yard_row:
+					bullets.remove(zombies_hit[zombie][0]);
+					print "same row!"
+					# the zombie took 1 unit damage
+					zombie.hit(1);
+					if zombie.health <= 0:
+						zombies.remove(zombie); 
+						game_settings.zombie_in_row[zombie.yard_row] -= 1; 
+
 		gf.update_screen(screen, game_settings, background, zombies, squares, plants, bullets, tick);
-		# screen.fill(game_settings.bg_color); 
-		tick += 1; 
-		if tick % 30 == 0:
-			zombies.add(Zombie(screen, game_settings));
-
-		pygame.display.flip();
-
-		plants_died = groupcollide(plants, zombies, True, True);
-		zombies_hit = groupcollide(zombies, bullets, False, True);
-		# zombies_died = groupcollide(zombies, bullets, True, True);
-
-		for zombie in zombies_hit:
-			# print zombie; 
-			# print zombies_hit[zombie];
-			if zombie.yard_row == zombies_hit[zombie][0].yard_row:
-				bullets.remove(zombies_hit[zombie][0]);
-				print "same row!"
-				# the zombie took 1 unit damage
-				zombie.hit(1);
-				if zombie.health <= 0:
-					zombies.remove(zombie); 
-					game_settings.zombie_in_row[zombie.yard_row] -= 1; 
-
 		pygame.display.flip();
 
 	if plants_died: 

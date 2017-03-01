@@ -10,4 +10,5 @@ class Peashooter(Plant):
 		self.screen = screen
 		self.square = square
 
+
 		super(Peashooter, self).__init__();
