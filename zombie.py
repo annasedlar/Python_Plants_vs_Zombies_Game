@@ -18,7 +18,7 @@ class Zombie(Sprite):
 		self.rect.right = self.screen_rect.right; 
 		self.yard_row = randint(0,4);
 		self.rect.centery = game_settings.squares['rows'][self.yard_row];
-		game_settings.zombie_in_row[self.yard_row] = True; 
+		game_settings.zombie_in_row[self.yard_row] += 1; 
 
 		self.x = float(self.rect.x)
 
