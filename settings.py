@@ -24,3 +24,10 @@ class Settings():
 			]
 		}
 		self.highlighted_square = 0;
+		self.zombie_in_row = [
+			False, 
+			False,
+			False, 
+			False, 
+			False
+		]

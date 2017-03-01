@@ -12,6 +12,7 @@ class Bullet(Sprite):
 		self.rect = self.image.get_rect();
 		self.rect.centerx = plant.rect.centerx; 
 		self.rect.top = plant.rect.top
+		self.yard_row = plant.yard_row; 
 
 		self.x = self.rect.x
 		self.y = self.rect.y
