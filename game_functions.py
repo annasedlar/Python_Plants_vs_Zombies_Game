@@ -27,9 +27,20 @@ def check_events(screen, game_settings, squares, plants, bullets):
 					plant.draw_me();
 					bullets.add(Bullet(screen, plant));
 
+		elif event.type == pygame.MOUSEMOTION: 
+			print event.pos
+			for square in squares:
+				if square.rect.collidepoint(event.pos):
+					# the sprite (square) itself, which is type Group
+					game_settings.highlighted_square = square; 
+					print game_settings.highlighted_square;
+
 def update_screen(screen, game_settings, background, zombies, squares, plants, bullets, tick):
 	# print 'test';
 	screen.blit(background.image, background.rect); 
+	if game_settings.highlighted_square != 0:
+		# params for draw: 1. WHERE (screen) 2. COLOR (RGB tuple) 3. coordinates (left, top, width, height (tuple)) 4. radius in px
+		pygame.draw.rect(screen, (255, 215, 0), (game_settings.highlighted_square.rect.left, game_settings.highlighted_square.rect.top, game_settings.squares['square_width'], game_settings.squares['square_height']), 5)
 
 	# draw zombies
 	for zombie in zombies.sprites():
@@ -45,3 +56,22 @@ def update_screen(screen, game_settings, background, zombies, squares, plants, b
 	for bullet in bullets.sprites():
 		bullet.update_me(); 
 		bullet.draw_me(); 
+
+	
+	# zombies_hit = groupcollide(zombies, bullets, False, True)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

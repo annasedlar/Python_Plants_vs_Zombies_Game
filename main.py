@@ -38,7 +38,17 @@ def run_game():
 		pygame.display.flip();
 
 		plants_died = groupcollide(plants, zombies, True, True);
-		zombies_died = groupcollide(zombies, bullets, True, True);
+		zombies_hit = groupcollide(zombies, bullets, False, True);
+		# zombies_died = groupcollide(zombies, bullets, True, True);
+
+		for zombie in zombies_hit:
+			print zombie; 
+			# the zombie took 1 unit damage
+			zombie.hit(1);
+			if zombie.health <= 0:
+				zombies.remove(zombie); 
+
+		pygame.display.flip();
 
 	if plants_died: 
 		print "*************************************"

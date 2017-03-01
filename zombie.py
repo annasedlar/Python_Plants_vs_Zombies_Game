@@ -32,19 +32,15 @@ class Zombie(Sprite):
 			self.rect.centery = 665
 
 
-
-
-
-
 	def update_me(self):
 		self.x -= self.speed * 1; 
 		self.rect.x = self.x; 
 
 	def draw_me(self): 
 		self.screen.blit(self.image, self.rect);
-
-
-
+		
+	def hit(self, damage):
+		self.health -= damage;
 
 
 
