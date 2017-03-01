@@ -33,7 +33,7 @@ def run_game():
 		# screen.fill(game_settings.bg_color); 
 		tick += 1; 
 		if tick % 30 == 0:
-			zombies.add(Zombie(screen, game_settings.zombie_speed, game_settings.zombie_health));
+			zombies.add(Zombie(screen, game_settings));
 
 		pygame.display.flip();
 

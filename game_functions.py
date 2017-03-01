@@ -57,8 +57,7 @@ def update_screen(screen, game_settings, background, zombies, squares, plants, b
 		bullet.update_me(); 
 		bullet.draw_me(); 
 
-	
-	# zombies_hit = groupcollide(zombies, bullets, False, True)
+
 
 
 
