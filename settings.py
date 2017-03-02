@@ -8,9 +8,10 @@ class Settings():
 		self.bg_color = (82,111,53); 
 		self.zombie_speed = 5; 
 		self.zombie_health = 5; 
-		self.game_active = True; 
+		self.game_active = False; 
 		self.chosen_plant = 1; 
 		self.zombies_killed = 0; 
+		self.game_active = False; 
 
 		# square stuff
 		self.squares = {

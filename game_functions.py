@@ -5,8 +5,10 @@ from peashooter import Peashooter;
 from gatling import Gatling; 
 from bullet import Bullet; 
 import time;
+from settings import Settings;
+from start_button import Start_Button;
 
-def check_events(screen, game_settings, squares, plants, bullets, icons): 
+def check_events(screen, game_settings, start_button, squares, plants, bullets, icons): 
 	# print 'test'
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT: 
@@ -16,6 +18,9 @@ def check_events(screen, game_settings, squares, plants, bullets, icons):
 			mouse_x, mouse_y = pygame.mouse.get_pos(); 
 			print mouse_x;
 			print mouse_y;
+
+			if start_button.rect.collidepoint(mouse_x, mouse_y):
+				game_settings.game_active = True; 
 
 			for square in squares: 
 				if square.rect.collidepoint(mouse_x, mouse_y):
@@ -48,9 +53,10 @@ def check_events(screen, game_settings, squares, plants, bullets, icons):
 					game_settings.highlighted_square = square; 
 					print game_settings.highlighted_square;
 
-def update_screen(screen, game_settings, background, zombies, squares, plants, bullets, tick, icons):
+def update_screen(screen, game_settings, start_button, background, zombies, squares, plants, bullets, tick, icons):
 	# print 'test';
 	screen.blit(background.image, background.rect); 
+	start_button.draw_button();
 
 	for icon in icons:
 		screen.blit(icon.image, icon.rect);
