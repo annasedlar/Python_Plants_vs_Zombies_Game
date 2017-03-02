@@ -7,6 +7,7 @@ from bullet import Bullet;
 import time;
 from settings import Settings;
 from start_button import Start_Button;
+from sunflower import Sunflower
 
 def check_events(screen, game_settings, start_button, squares, plants, bullets, icons): 
 	# print 'test'
@@ -30,11 +31,13 @@ def check_events(screen, game_settings, start_button, squares, plants, bullets, 
 						plants.add(Peashooter(screen,square));
 					elif(game_settings.chosen_plant == 2):
 						plants.add(Gatling(screen,square));
+					elif(game_settings.chosen_plant == 3):
+						plants.add(Sunflower(screen,square));
 
 			for icon in icons:
 				if icon.rect.collidepoint(mouse_x,mouse_y):
 					game_settings.chosen_plant = icon.slot
-					print "You clicked: ",icon.image;
+					print "You clicked: ", icon.image;
 					# plants.add(Peashooter(screen,square));
 
 		elif event.type == pygame.KEYDOWN:
@@ -56,7 +59,8 @@ def check_events(screen, game_settings, start_button, squares, plants, bullets, 
 def update_screen(screen, game_settings, start_button, background, zombies, squares, plants, bullets, tick, icons):
 	# print 'test';
 	screen.blit(background.image, background.rect); 
-	start_button.draw_button();
+	if game_settings.game_active == False:
+		start_button.draw_button();
 
 	for icon in icons:
 		screen.blit(icon.image, icon.rect);
@@ -79,8 +83,10 @@ def update_screen(screen, game_settings, start_button, background, zombies, squa
 		print plant.yard_row; 
 		should_shoot = time.time() - plant.last_shot > plant.shoot_speed
 		# print time.time() - plant.last_shot;
+		can_shoot = plant.can_shoot;
 		in_my_row = game_settings.zombie_in_row[plant.yard_row] > 0 
-		if should_shoot and in_my_row:
+
+		if should_shoot and can_shoot and in_my_row:
 			bullets.add(Bullet(screen, plant));
 			plant.last_shot = time.time();
 		# every 1 second = 30 frames
@@ -97,7 +103,7 @@ def update_screen(screen, game_settings, start_button, background, zombies, squa
 
 	score_font = pygame.font.SysFont("monospace", 36); 
 	# render takes 3 params (1 what text, 2, ? 3, color)
-	score_render = score_font.render("Zombies Killed: " + str(game_settings.zombies_killed) + " !!!!", 1, (255, 215, 0));
+	score_render = score_font.render("Zombies Killed: " + str(game_settings.zombies_killed) + "!", 1, (255, 215, 0));
 	screen.blit(score_render, (100,100))
 
 

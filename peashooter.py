@@ -9,6 +9,6 @@ class Peashooter(Plant):
 		self.image_file = 'images/peashooter.png';
 		self.screen = screen
 		self.square = square
-
+		self.can_shoot = True;
 
 		super(Peashooter, self).__init__();

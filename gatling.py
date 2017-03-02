@@ -10,5 +10,6 @@ class Gatling(Plant):
 		self.screen = screen;
 		self.square = square;
 		self.name = "gatling";
+		self.can_shoot = True;
 
 		super(Gatling, self).__init__();

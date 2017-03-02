@@ -16,7 +16,8 @@ pygame.display.set_caption("Plants V Zombies");
 background = Background(game_settings); 
 peashooter_icon = Plant_Icon(game_settings, 'peashooter.png', 1);
 gatling_icon = Plant_Icon(game_settings, 'Gatling_Pea_Fixed.png', 2);
-icons = [peashooter_icon, gatling_icon];
+sunflower_icon = Plant_Icon(game_settings, 'sunflower.png', 3);
+icons = [peashooter_icon, gatling_icon, sunflower_icon];
 start_button = Start_Button(screen); 
 # our groups
 zombies = Group(); 
