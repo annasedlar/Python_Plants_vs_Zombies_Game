@@ -4,7 +4,7 @@ from plant import Plant;
 from peashooter import Peashooter;
 from gatling import Gatling; 
 from bullet import Bullet; 
-
+import time;
 
 def check_events(screen, game_settings, squares, plants, bullets, icons): 
 	# print 'test'
@@ -71,6 +71,12 @@ def update_screen(screen, game_settings, background, zombies, squares, plants, b
 	for plant in plants:
 		plant.draw_me();
 		print plant.yard_row; 
+		should_shoot = time.time() - plant.last_shot > plant.shoot_speed
+		# print time.time() - plant.last_shot;
+		in_my_row = game_settings.zombie_in_row[plant.yard_row] > 0 
+		if should_shoot and in_my_row:
+			bullets.add(Bullet(screen, plant));
+			plant.last_shot = time.time();
 		# every 1 second = 30 frames
 		if tick % 10 == 0:
 			if game_settings.zombie_in_row[plant.yard_row] > 0: 
@@ -83,7 +89,10 @@ def update_screen(screen, game_settings, background, zombies, squares, plants, b
 
 
 
-
+	score_font = pygame.font.SysFont("monospace", 36); 
+	# render takes 3 params (1 what text, 2, ? 3, color)
+	score_render = score_font.render("Zombies Killed: " + str(game_settings.zombies_killed) + " !!!!", 1, (255, 215, 0));
+	screen.blit(score_render, (100,100))
 
 
 

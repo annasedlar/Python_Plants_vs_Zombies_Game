@@ -10,6 +10,7 @@ class Settings():
 		self.zombie_health = 5; 
 		self.game_active = True; 
 		self.chosen_plant = 1; 
+		self.zombies_killed = 0; 
 
 		# square stuff
 		self.squares = {
