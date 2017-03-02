@@ -12,6 +12,7 @@ class Settings():
 		self.chosen_plant = 1; 
 		self.zombies_killed = 0; 
 		self.game_active = False; 
+		self.total_sun = 0;
 
 		# square stuff
 		self.squares = {
@@ -34,4 +35,9 @@ class Settings():
 			0,
 			0,
 			0
+		]
+		self.plant_list = [
+			'Peashooter',
+			'Gatling',
+			'Sunflower'
 		]

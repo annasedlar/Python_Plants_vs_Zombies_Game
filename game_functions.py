@@ -8,6 +8,7 @@ import time;
 from settings import Settings;
 from start_button import Start_Button;
 from sunflower import Sunflower
+import pygame.font
 
 def check_events(screen, game_settings, start_button, squares, plants, bullets, icons): 
 	# print 'test'
@@ -77,6 +78,7 @@ def update_screen(screen, game_settings, start_button, background, zombies, squa
 		zombie.draw_me();
 		if zombie.rect.left <= zombie.screen_rect.left:
 			game_settings.game_active = False;
+		zombie.moving = True;
 
 	for plant in plants:
 		plant.draw_me();
@@ -89,6 +91,13 @@ def update_screen(screen, game_settings, start_button, background, zombies, squa
 		if should_shoot and can_shoot and in_my_row:
 			bullets.add(Bullet(screen, plant));
 			plant.last_shot = time.time();
+
+		can_make_sun = plant.can_make_sun;
+		should_make_sun = time.time() - plant.last_sun > plant.sun_speed; 
+
+		if can_make_sun and should_make_sun:
+			plant.make_sun(game_settings);	
+			plant.last_sun = time.time();
 		# every 1 second = 30 frames
 		if tick % 10 == 0:
 			if game_settings.zombie_in_row[plant.yard_row] > 0: 
@@ -101,10 +110,13 @@ def update_screen(screen, game_settings, start_button, background, zombies, squa
 
 
 
-	score_font = pygame.font.SysFont("monospace", 36); 
+	score_font = pygame.font.Font(None, 36); 
 	# render takes 3 params (1 what text, 2, ? 3, color)
 	score_render = score_font.render("Zombies Killed: " + str(game_settings.zombies_killed) + "!", 1, (255, 215, 0));
 	screen.blit(score_render, (100,100))
+
+	sun_render = score_font.render("Collected Sun: " + str(game_settings.total_sun) + "!", 1, (255, 215, 0));
+	screen.blit(sun_render, (100,150))
 
 
 

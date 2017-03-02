@@ -8,6 +8,7 @@ from zombie import Zombie;
 from square import Square;
 from plant_icon import Plant_Icon;
 from start_button import Start_Button;
+import time;
 
 pygame.init();
 game_settings = Settings(); 
@@ -41,7 +42,7 @@ def run_game():
 			if tick % 30 == 0:
 				zombies.add(Zombie(screen, game_settings));
 
-			plants_died = groupcollide(plants, zombies, True, True);
+			# plants_died = groupcollide(plants, zombies, True, True);
 			zombies_hit = groupcollide(zombies, bullets, False, True);
 			# zombies_died = groupcollide(zombies, bullets, True, True);
 
@@ -58,6 +59,22 @@ def run_game():
 						game_settings.zombie_in_row[zombie.yard_row] -= 1; 
 						game_settings.zombies_killed +=1; 
 
+			zombies_eating = groupcollide(zombies, plants, False, False);
+
+			for zombie in zombies_eating:
+				damaged_plant = zombies_eating[zombie][0];
+				if zombie.yard_row == damaged_plant.yard_row:
+					# zombie has run into a plant in its row - start/continue eating!
+					zombie.moving = False; 
+					if time.time() - zombie.started_eating > zombie.damage_time:
+						# print "Zombie just took a bite";
+						zombie.zombie_chomp(damaged_plant);
+						zombie.started_eating = time.time();
+						if damaged_plant.health <= 0 :
+							plants.remove(damaged_plant);
+							zombie.moving = True; 
+
+
 		gf.update_screen(screen, game_settings, start_button, background, zombies, squares, plants, bullets, tick, icons);
 		pygame.display.flip();
 
@@ -67,6 +84,7 @@ def run_game():
 		print "************YOU LOST!****************"
 		print "*************************************"
 		print "*************************************"
+
 	if game_settings.game_active == False:
 		start_button.draw_button();
 

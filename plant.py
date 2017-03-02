@@ -14,7 +14,9 @@ class Plant(Sprite):
 		self.rect.top = self.square.rect.top;
 
 		self.yard_row = self.square.row_number; 
-		self.last_shot = 0
+		self.last_shot = 0;
+		self.sun_speed = 0;
+		self.last_sun = 0;
 
 	def draw_me(self):
 		self.screen.blit(self.image, self.rect); 
