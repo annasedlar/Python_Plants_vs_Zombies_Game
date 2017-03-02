@@ -20,7 +20,7 @@ def check_events(screen, game_settings, squares, plants, bullets, icons):
 			for square in squares: 
 				if square.rect.collidepoint(mouse_x, mouse_y):
 					print "square: ", square.square_number; 
-					plants.add(Peashooter(screen, square));
+					# plants.add(Peashooter(screen, square));
 					if(game_settings.chosen_plant == 1):
 						plants.add(Peashooter(screen,square));
 					elif(game_settings.chosen_plant == 2):
