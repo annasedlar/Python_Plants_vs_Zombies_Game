@@ -96,12 +96,12 @@ def update_screen(screen, game_settings, start_button, background, zombies, squa
 		should_make_sun = time.time() - plant.last_sun > plant.sun_speed; 
 
 		if can_make_sun and should_make_sun:
-			plant.make_sun(game_settings);	
+			plant.make_sun(game_settings);
 			plant.last_sun = time.time();
 		# every 1 second = 30 frames
-		if tick % 10 == 0:
-			if game_settings.zombie_in_row[plant.yard_row] > 0: 
-				bullets.add(Bullet(screen, plant));
+		# if tick % 10 == 0:
+		# 	if game_settings.zombie_in_row[plant.yard_row] > 0: 
+		# 		bullets.add(Bullet(screen, plant));
 			
 
 	for bullet in bullets.sprites():

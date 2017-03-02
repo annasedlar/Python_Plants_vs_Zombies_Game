@@ -18,4 +18,4 @@ class Sunflower(Plant):
 		super(Sunflower, self).__init__();
 
 	def make_sun(self,game_settings):
-		game_settings.total_sun += 25;
+		game_settings.total_sun += 5;

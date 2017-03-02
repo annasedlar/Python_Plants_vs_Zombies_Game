@@ -7,7 +7,7 @@ class Settings():
 		self.screen_size = (display_info.current_w, display_info.current_h);
 		self.bg_color = (82,111,53); 
 		self.zombie_speed = 5; 
-		self.zombie_health = 5; 
+		self.zombie_health = 50; 
 		self.game_active = False; 
 		self.chosen_plant = 1; 
 		self.zombies_killed = 0; 

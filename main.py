@@ -43,7 +43,7 @@ def run_game():
 				zombies.add(Zombie(screen, game_settings));
 
 			# plants_died = groupcollide(plants, zombies, True, True);
-			zombies_hit = groupcollide(zombies, bullets, False, True);
+			zombies_hit = groupcollide(zombies, bullets, False, False);
 			# zombies_died = groupcollide(zombies, bullets, True, True);
 
 			for zombie in zombies_hit:
