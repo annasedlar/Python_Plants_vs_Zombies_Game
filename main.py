@@ -6,13 +6,16 @@ import game_functions as gf;
 from pygame.sprite import Group, groupcollide; 
 from zombie import Zombie;
 from square import Square;
-# from plant import Plant;
+from plant_icon import Plant_Icon;
 
 pygame.init();
 game_settings = Settings(); 
 screen = pygame.display.set_mode(game_settings.screen_size);
 pygame.display.set_caption("Plants V Zombies");
 background = Background(game_settings); 
+peashooter_icon = Plant_Icon(game_settings, 'peashooter.png', 1);
+gatling_icon = Plant_Icon(game_settings, 'Gatling_Pea_Fixed.png', 2);
+icons = [peashooter_icon, gatling_icon];
 
 # our groups
 zombies = Group(); 
@@ -29,7 +32,7 @@ def run_game():
 	tick = 0; 
 	while 1: 
 		# print game_settings.game_active;
-		gf.check_events(screen, game_settings, squares, plants, bullets); 
+		gf.check_events(screen, game_settings, squares, plants, bullets, icons); 
 		if game_settings.game_active == True:
 			# screen.fill(game_settings.bg_color); 
 			tick += 1; 
@@ -52,7 +55,7 @@ def run_game():
 						zombies.remove(zombie); 
 						game_settings.zombie_in_row[zombie.yard_row] -= 1; 
 
-		gf.update_screen(screen, game_settings, background, zombies, squares, plants, bullets, tick);
+		gf.update_screen(screen, game_settings, background, zombies, squares, plants, bullets, tick, icons);
 		pygame.display.flip();
 
 	if plants_died: 

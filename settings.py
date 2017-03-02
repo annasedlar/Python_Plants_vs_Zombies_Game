@@ -9,6 +9,7 @@ class Settings():
 		self.zombie_speed = 5; 
 		self.zombie_health = 5; 
 		self.game_active = True; 
+		self.chosen_plant = 1; 
 
 		# square stuff
 		self.squares = {

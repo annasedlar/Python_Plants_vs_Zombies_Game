@@ -2,10 +2,11 @@ import sys;
 import pygame; 
 from plant import Plant;
 from peashooter import Peashooter;
+from gatling import Gatling; 
 from bullet import Bullet; 
 
 
-def check_events(screen, game_settings, squares, plants, bullets): 
+def check_events(screen, game_settings, squares, plants, bullets, icons): 
 	# print 'test'
 	for event in pygame.event.get():
 		if event.type == pygame.QUIT: 
@@ -20,6 +21,16 @@ def check_events(screen, game_settings, squares, plants, bullets):
 				if square.rect.collidepoint(mouse_x, mouse_y):
 					print "square: ", square.square_number; 
 					plants.add(Peashooter(screen, square));
+					if(game_settings.chosen_plant == 1):
+						plants.add(Peashooter(screen,square));
+					elif(game_settings.chosen_plant == 2):
+						plants.add(Gatling(screen,square));
+
+			for icon in icons:
+				if icon.rect.collidepoint(mouse_x,mouse_y):
+					game_settings.chosen_plant = icon.slot
+					print "You clicked: ",icon.image;
+					# plants.add(Peashooter(screen,square));
 
 		elif event.type == pygame.KEYDOWN:
 			print event.key
@@ -37,9 +48,13 @@ def check_events(screen, game_settings, squares, plants, bullets):
 					game_settings.highlighted_square = square; 
 					print game_settings.highlighted_square;
 
-def update_screen(screen, game_settings, background, zombies, squares, plants, bullets, tick):
+def update_screen(screen, game_settings, background, zombies, squares, plants, bullets, tick, icons):
 	# print 'test';
 	screen.blit(background.image, background.rect); 
+
+	for icon in icons:
+		screen.blit(icon.image, icon.rect);
+
 	if game_settings.highlighted_square != 0:
 		# params for draw: 1. WHERE (screen) 2. COLOR (RGB tuple) 3. coordinates (left, top, width, height (tuple)) 4. radius in px
 		pygame.draw.rect(screen, (255, 215, 0), (game_settings.highlighted_square.rect.left, game_settings.highlighted_square.rect.top, game_settings.squares['square_width'], game_settings.squares['square_height']), 5)
